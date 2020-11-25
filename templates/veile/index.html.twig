@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    <div class="container d-flex flex-wrap mt-5">
+        {% if articles is not empty %}
+        {% for article in articles %}
+            <div class="card mt-4" style="width: 18rem;">
+                <img src="/uploads/images/articles/{{ article.image }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.titre }}</h5>
+                    <p class="card-text">{{ article.contenuArticle }}</p>
+                    <p class="card-text">Date : {{ article.dateArticle | date('d/m/Y') }}</p>
+                    <a href="{{ path('veille_show', {'id' : article.id}) }}" class="btn btn-primary">Détail</a>
+                    <a href="{{ path('veille_del', {'id' : article.id}) }}" class="btn btn-outline-danger">Supprimer l'article</a>
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+            Aucun Article
+        {% endif %}
+    </div>
+    <a class="btn btn-secondary mt-3 ml-3 mb-4" href="{{ path('veile_add') }}">Ajouter</a>
+{% endblock %}

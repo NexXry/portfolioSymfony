@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="jumbotron mt-5">
+        <img src="/uploads/images/competences/{{ article.image }}" width="75%" height="50%"/>
+        <h1 class="display-4-sm">{{ article.nom }}</h1>
+        <p class="lead">{{ article.description }}</p>
+        <hr class="my-4">
+    </div>
+{% endblock %}

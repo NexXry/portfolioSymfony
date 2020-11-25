@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form 'bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block body %}
+
+
+    <div class="container mt-5">
+            <h1>Ajouter une Compétence</h1>
+            {{ form_start(form) }}
+
+            {{ form_row(form.nom, {'attr': {'placeholder' : 'Le titre'}}) }}
+            {{ form_row(form.imageFile, {'attr': {'placeholder' : 'Déposer une image'}}) }}
+            {{ form_row(form.description, {'attr': {'placeholder' : 'La description'}}) }}
+
+        <button type="submit" class="btn btn-danger mt-5 mb-5">Ajouter</button>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

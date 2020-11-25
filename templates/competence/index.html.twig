@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CompetenceController!{% endblock %}
+
+{% block body %}
+    <h3 class="mt-2">Les compétences acquises pendant le BTS:</h3>
+    <div class="container d-flex flex-wrap mt-5">
+        {% if competences is not empty %}
+            {% for competence in competences %}
+                <div class="card ml-4" style="width: 18rem;">
+                    <img src="/uploads/images/competences/{{ competence.image }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ competence.nom }}</h5>
+                        <p class="card-text">{{ competence.description }}</p>
+                        <a href="{{ path('competence_show', {'id' : competence.id}) }}" class="btn btn-primary">Détail</a>
+                        <a href="{{ path('competence_del', {'id' : competence.id}) }}" class="btn btn-outline-danger">Supprimer l'article</a>
+
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            Aucune Compétence enregistrait
+        {% endif %}
+    </div>
+    <a class="btn btn-secondary mt-3 ml-3 mb-4" href="{{ path('compétence_add') }}">Ajouter</a>
+{% endblock %}

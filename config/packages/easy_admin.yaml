@@ -1,0 +1,30 @@
+# config/packages/easy_admin.yaml
+easy_admin:
+  entities:
+    article:
+      # ...
+      list:
+        fields:
+          - { property: 'imageFile', type: 'image', base_path: '%app.path.article_images%' }
+          - { property: 'imageFile', template: 'index.html.twig' }
+          - { property: 'imageFile', template: 'show.html.twig' }
+
+      # ...
+      show:
+        fields:
+          - { property: 'imageFile', type: 'image', base_path: '%app.path.article_images%' }
+          - { property: 'imageFile', template: 'index.html.twig' }
+          - { property: 'imageFile', template: 'show.html.twig' }
+    competence:
+      # ...
+      list:
+        fields:
+          - { property: 'imageFile', type: 'image', base_path: '%app.path.com_images%' }
+          - { property: 'imageFile', template: 'index.html.twig' }
+          - { property: 'imageFile', template: 'show.html.twig' }
+      # ...
+      show:
+        fields:
+          - { property: 'imageFile', type: 'image', base_path: '%app.path.com_images%' }
+          - { property: 'imageFile', template: 'index.html.twig' }
+          - { property: 'imageFile', template: 'show.html.twig' }

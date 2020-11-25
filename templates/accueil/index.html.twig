@@ -1,0 +1,207 @@
+{% extends 'base.html.twig' %}
+
+    {% block stylesheets %}
+
+        <style>
+            #d img{
+                border-radius: 121px 9px 132px 3px;
+                -moz-border-radius: 121px 9px 132px 3px;
+                -webkit-border-radius: 121px 9px 132px 3px;
+                border: 0px solid #000000;
+
+            }
+        </style>
+    {% endblock %}
+
+{% block body %}
+    <body id="page-top">
+
+    <div class="container-fluid mt-4" id="d">
+        <img src="/uploads/images/competences/s.jpg" width="100%">
+    </div>
+
+    <!-- Services-->
+    <section class="page-section" id="services">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Services</h2>
+                <h3 class="section-subheading text-muted">Voici l'ensemble des services que je vous propose .</h3>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                        </span>
+                    <h4 class="my-3">Création de site E-commerce</h4>
+                    <p class="text-muted">Je vous propose mes compétences dans le domaine de la création de site Web E-commerce,cela vous permettra de mettre en avant vos produits !</p>
+                </div>
+                <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-code fa-stack-1x fa-inverse"></i>
+                        </span>
+                    <h4 class="my-3">Création sur mesure</h4>
+                    <p class="text-muted">Je vous propose mes compétences dans développement, pour vous permettre de créer le site/application qui vous sera utile ! </p>
+                </div>
+                <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-store fa-stack-1x fa-inverse"></i>
+                        </span>
+                    <h4 class="my-3">Création de site vitrine</h4>
+                    <p class="text-muted">Je vous propose mes compétences dans développement de site vitrine, pour vous permettre de créer le site qui vous permettra de mettre en avant votre entreprise ! </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Portfolio Grid-->
+    <section class="page-section bg-light" id="portfolio">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Portfolio</h2>
+                <h3 class="section-subheading text-muted">Voici la liste de mes compétences .</h3>
+            </div>
+            <div class="row">
+                {% if competences is not empty %}
+                {% for competence in competences %}
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="portfolio-item">
+                        <a class="portfolio-link" data-toggle="modal" href="#portfolioModal{{ competence.id }}">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                            </div>
+                            <img class="img-fluid" src="/uploads/images/competences/{{ competence.image }}" alt="" />
+                        </a>
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">{{ competence.nom }}</div>
+                            <div class="portfolio-caption-subheading text-muted"></div>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                    <h1 class="ml-5">pas de compétence enregistré !</h1>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <!-- About-->
+    <section class="page-section" id="about">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">À propos</h2>
+                <h3 class="section-subheading text-muted">évolution de mon parcours .</h3>
+            </div>
+            <ul class="timeline">
+                {% if Veille is not empty %}
+                    {% for v in Veille %}
+                        <li>
+                            <div class="timeline-image"><img class="rounded-circle img-fluid" src="assets/img/about/1.jpg" alt="" ><a href="{{ path('veille_show', {'id' : v.id}) }}" ><img class="mt-5" src="/uploads/images/articles/{{ v.image }}" width="100px"/></a><img/></div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>{{ v.dateArticle | date("d:m:Y") }}</h4>
+                                    <h4 class="subheading">{{ v.titre }}</h4>
+                                </div>
+                                <div class="timeline-body"><p class="text-muted">{{ v.contenuArticle }}</p></div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <h1 class="text-xl-center">pas d'article enregistré !</h1>
+                {% endif %}
+            </ul>
+        </div>
+    </section>
+    <!-- Contact-->
+    <section class="page-section" id="contact">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase">Contactez-moi !</h2>
+                <h3 class="section-subheading text-muted">Vous pouvez me faire par de projet via ce formulaire !</h3>
+            </div>
+            <form id="contactForm" name="sentMessage" novalidate="novalidate">
+                <div class="row align-items-stretch mb-5" action="{{ path('mail') }}" method="post">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input class="form-control" id="name" type="text" placeholder="Votre nom *" required="required" data-validation-required-message="Please enter your name." />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" id="email" type="email" placeholder="Votre adresse Mail *" required="required" data-validation-required-message="Please enter your email address." />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="form-group mb-md-0">
+                            <input class="form-control" id="phone" type="tel" placeholder="Votre numéro de Téléphone *" required="required" data-validation-required-message="Please enter your phone number." />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group form-group-textarea mb-md-0">
+                            <textarea class="form-control" id="message" placeholder="Votre Message *" required="required" data-validation-required-message="Please enter a message."></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <div id="success"></div>
+                    <button class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit">Envoyer un message</button>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- Footer-->
+    <footer class="footer py-4" style='background-color: #336e7b;'>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-lg-left">Copyright © I NEED IT 2020</div>
+                <div class="col-lg-4 my-3 my-lg-0">
+                    <a class="btn btn-dark btn-social mx-2" href="https://www.linkedin.com/in/nicolas-castex-webdev/"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <div class="col-lg-4 text-lg-right">
+                    <a class="mr-3" href="{{ path('mention') }}">Mention légale</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Portfolio Modals-->
+    <!-- Modal 1-->
+    {% if competences is not empty %}
+        {% for competence in competences %}
+    <div class="portfolio-modal modal fade" id="portfolioModal{{ competence.id }}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal"><button class="btn btn-primary" data-dismiss="modal" type="button">
+                        <i class="fas fa-times mr-1"></i>
+                    </button></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="modal-body">
+                                <!-- Project Details Go Here-->
+                                <h2 class="text-uppercase">{{ competence.nom }}</h2>
+                                <img class="img-fluid d-block mx-auto" src="/uploads/images/competences/{{ competence.image }}" alt="" />
+                                <p>{{ competence.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Third party plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <!-- Contact form JS-->
+    <script src="assets/mail/jqBootstrapValidation.js"></script>
+    <script src="assets/mail/contact_me.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    </body>
+{% endblock %}

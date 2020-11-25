@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="jumbotron mt-5">
+        <img src="/uploads/images/articles/{{ article.image }}" width="550px">
+        <h1 class="display-4-sm">{{ article.titre }}</h1>
+        <p class="lead">{{ article.contenuArticle }}</p>
+        <hr class="my-4">
+        <p>Date : {{ article.dateArticle | date('d/m/Y') }}</p>
+        {% if last.id > article.id %}
+        <a href="{{ path('veille_show', {'id' : article.id +1}) }}" class="btn btn-outline-secondary">Article suivant</a>
+        {% endif %}
+    </div>
+{% endblock %}
